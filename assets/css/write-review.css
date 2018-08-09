@@ -1,0 +1,42 @@
+
+/* BODY */
+body {
+    font-family: Helvetica, sans-serif, Arial;
+    font-size: 20px;
+}
+
+.font-caveat {
+    font-family: 'Caveat', 'cursive';
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+/* REVIEW PAGE */
+#p-zip {
+    display: inline-block;
+}
+
+.review-textarea {
+    height: 140px;
+}
+/* OVERWRITE MATERIALIZE */
+div.input-field, div.name-input{
+    margin: 0;
+}
+
+div.row div.col {
+    padding: 0;
+}
+
+div.mb-20 {
+    margin-bottom: 20px;
+}

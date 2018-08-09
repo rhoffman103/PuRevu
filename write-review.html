@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Write Pu ReVu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import Logo Font -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Styles CSS -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/write-review.css" /> -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Styles CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/styles.css" />
+    <!-- Import Logo Font -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a class="brand-logo font-caveat text-darken-2 bold mb-0">Pu ReVu</a>
+                <a href="#" data-target="side-pu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="write-review.html">Write Review
+                            <i class="material-icons left">rate_review</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="read-reviews.html">Read Reviews</a>
+                    </li>
+                    <li>
+                        <a href="things-to-read.html">Reading Materials</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="side-pu">
+        <div class="background">
+            <img src="assets/images/logo_blue_smaller.jpg">
+        </div>
+        <li>
+            <a href="index.html">
+                <i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+            <a href="write-review.html">
+                <i class="material-icons">rate_review</i>Write Review</a>
+        </li>
+        <li>
+            <a href="read-reviews.html">
+                <i class="material-icons">import_contacts</i>Read Reviews</a>
+        </li>
+        <li>
+            <a href="things-to-read.html">
+                <i class="material-icons">library_books</i>Reading Materials</a>
+        </li>
+    </ul>
+    <main>
+        <div class="container" id="page-content">
+            <h1 class="center-align font-caveat blue-text text-darken-2 bold mb-0 hide-on-med-and-down">Pu ReVu</h1>
+
+            <div class="row" id="failed-submit">
+                <!-- <div class="col s12 red lighten-3">
+                    <p class="hide">You must enter a Business and Zip to submit a review</p>
+                </div> -->
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <!-- BUSINESS & ZIP CODE -->
+                    <div class="col m6 s12">
+                        <div class="input-field col s12 name-input">
+                            <input id="business" value="" placeholder="Business Name">
+                        </div>
+                    </div>
+                    <!-- </div> -->
+
+                    <div class="col m6 s12">
+                        <div class="input-field col s12">
+                            <input id="z-input" value="" placeholder="zip">
+                        </div>
+                    </div>
+                    <a class="blue-text text-darken-2 right pointer-curser change-zip" id="change-zip">
+                        <i class="material-icons right">my_location</i>Change</a>
+                </div>
+            </div>
+
+            <!-- =====New Ratings===== -->
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-action">
+                            <h6>Recommend Pu</h6>
+                        </div>
+                        <div class="card-content">
+                            <!-- <div class="mb-20"> -->
+                                <div class="row">
+                                    <ul>
+                                        <li class="col s6 pointer-curser">
+                                            <i class="material-icons thumb-rate">thumb_up</i>
+                                            <span class="black-text"> Glorious </span>
+                                        </li>
+                                        <li class="col s6 pointer-curser">
+                                            <i class="material-icons thumb-rate">thumb_down</i>
+                                            <span class="black-text"> Crappy </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-action">
+                            <h6>Cleanliness</h6>
+                        </div>
+                        <div class="card-content">
+                            <div>
+                                <div class="row">
+                                    <ul>
+                                        <li class="col s6 pointer-curser">
+                                            <i class="material-icons thumb-rate">thumb_up</i>
+                                            <span class="black-text"> Clean </span>
+                                        </li>
+                                        <li class="col s6 pointer-curser">
+                                            <i class="material-icons  thumb-rate">thumb_down</i>
+                                            <span class="black-text"> Grimey </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- =====^^^New Ratings^^^===== -->
+
+
+            <!-- COMMENTS -->
+            <div class="row">
+                <form class="input-field col s12">
+                    <textarea name="message" class="review-textarea comments" value="" placeholder="Write your review."></textarea>
+                </form>
+            </div>
+
+            <!-- SUBMIT & HOME PAGE BUTTONS -->
+            <div class="col s12 center-align">
+                <a class="waves-effect waves-light blue darken-2 btn" id="submit-btn">
+                    <i class="material-icons right">publish</i>submit
+                </a>
+                <!-- <a class="waves-effect waves-light blue darken-2 btn" href="index.html">
+                    <i class="material-icons right">home</i>Home page
+                </a> -->
+            </div>
+        </div>
+
+
+
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container  grey-text text-lighten-5 center">
+                Copyright © 2018
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <!-- Scripts -->
+    <script src="assets/javascript/zip.js"></script>
+    <script src="assets/javascript/scripts.js"></script>
+    <script src="assets/javascript/write-reviews.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</body>
+
+</html>

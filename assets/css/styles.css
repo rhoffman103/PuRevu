@@ -1,0 +1,109 @@
+.info {
+    padding: 20px;
+}
+
+.font-caveat {
+    font-family: 'Caveat', 'cursive';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+}
+
+main{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.nav-wrapper{
+    background-color: #414bb2;
+}
+
+
+.nav-wrapper ul li.active {
+    background-color:  #51acf2
+}
+
+nav .brand-logo{
+    color:  #51acf2;
+    font-size: 3rem;
+
+}
+
+.card-action{
+    border-bottom: 1px solid lightgray;
+}
+
+.row {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.page-footer{
+    background-color: #414bb2;
+}
+.sidenav{
+    background-color: #414bb2;
+
+}
+.sidenav li{
+    background-color: white;
+}
+
+.change-zip {
+    display: inline-block;
+    max-width: 120px;
+    margin-left: 20px;
+    text-decoration: underline;
+}
+
+.pointer-curser:hover {
+    cursor: pointer;
+}
+
+form {
+    margin-bottom: 15px;
+}
+
+.business {
+    text-decoration: underline;
+}
+
+.thumb-rate {
+    text-shadow: 2px 2px 5px rgba(128, 0, 128, 0.5);
+}
+
+.submit-warning {
+    font-size: large;
+    padding: 12px 0 12px 0;
+}
+
+p {
+    font-size: large;
+}
+
+.separator {
+    border-bottom: 2px solid lightgrey;
+    margin-bottom: 15px;
+}
+
+.span-separater {
+    margin-left: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}

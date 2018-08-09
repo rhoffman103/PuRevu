@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <form>
+                Enter Zip: <input class="zip-input" type="text" value="" placeholder="03801"><br>
+                <button type="button">Click Me!</button>
+            </form>
+                    
+            <div class="content">
+                <!-- Display business & total votes -->
+                <div class="title"></div>
+
+                <!-- display comment cards -->
+                <div class="comment-cards"></div>
+            
+                <!-- display quick ratings per business -->
+                <div class="review-list"></div>
+            </div>
+
+        </div>
+
+        <!-- jQuery CDN -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <!-- Firebase CDN -->
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // Initialize Firebase
+                var config = {
+                    apiKey: "AIzaSyB5w4kD4fczy7qVSDvoZLv8ks7UK3O8-ps",
+                    authDomain: "poo-review-4f8c8.firebaseapp.com",
+                    databaseURL: "https://poo-review-4f8c8.firebaseio.com",
+                    projectId: "poo-review-4f8c8",
+                    storageBucket: "",
+                    messagingSenderId: "884187524701"
+                };
+                firebase.initializeApp(config);
+
+                var database = firebase.database();
+
+                sessionStorage.setItem("zip", "03801");
+                sessionStorage.setItem("currentBusiness", "granite state");
+
+                //  RETRIEVE BUSINESSES BY ZIP
+                const listBusinesses = function (postal) {
+                    var businessRef = database.ref("business");
+                    businessRef.orderByChild("zip").equalTo(postal).once("value", function (snapshot) {
+                        // console.log(snapshot.val());
+                        var obj = snapshot.val();
+                        Object.keys(obj).forEach(function (element) {
+                            console.log(obj[element].name);
+                        })
+                        // console.log(snapshot.key);
+                    });
+                }
+
+                //  LIST BUSINESSES AND QUICK RATINGS
+                const quickRatings = function (postal) {
+                    console.log("calling quick ratings")
+                    var businessRef = database.ref("business");
+                    businessRef.orderByChild("zip").equalTo(postal).once("value", function (snapshot) {
+                        // console.log(snapshot.val());
+                        var obj = snapshot.val();
+                        Object.keys(obj).forEach(function (element) {
+                            console.log(obj[element].name);
+                            var reviewDiv = $("<div>");
+                            var header = $("<h3>");
+                            header.addClass("business");
+                            header.attr("data-key", element);
+                            header.attr("data-zip", obj[element].zip);
+
+                            var ratingThing = $("<p>");
+                            var recommendPerc = Math.round((obj[element].ratings.recommend / (obj[element].ratings.recommend + obj[element].ratings.oppose)) * 100);
+                            var cleanPerc = Math.round((obj[element].ratings.clean / (obj[element].ratings.clean + obj[element].ratings.dirty)) * 100);
+                            ratingThing.text('%' + recommendPerc + " Recommended | %" + cleanPerc + " Cleanliness");
+                            header.text(obj[element].name);
+                            reviewDiv.append(header);
+                            reviewDiv.append(ratingThing);
+                            $(".review-list").append(reviewDiv);
+                            console.log(recommendPerc)
+                            console.log(cleanPerc)
+                        })
+                        // console.log(snapshot.key);
+                    });
+                }
+                
+                //  RETRIEVE BUSINESSES BY ZIP AND DISPLAY COMMENTS
+                const displayComments = function (name, postal) {
+                    var businessRef = database.ref("business");
+                    businessRef.once('value', function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            var childKey = childSnapshot.key;
+                            var childData = childSnapshot.val();
+                            if ((name === childData.name) && (postal === childData.zip)) {
+                                console.log("Business Match!");
+                                var commentsRef = database.ref(`/business/${childKey}/comments`);
+                                commentsRef.once('value', function (snapshot) {
+                                    console.log("Comments:")
+
+                                    // MAKE COMMENT CARD IN THIS FOREACH LOOP
+                                    // you can use commentData.recommend commentData.comment commentData.dateAdded
+                                    snapshot.forEach(function (commentSnapshot) {
+                                        var commentKey = commentSnapshot.key
+                                        var commentData = commentSnapshot.val();
+                                        console.log("comment key: " + commentKey);
+                                        console.log(`recomend = ${commentData.recommended}\nDate Added: ${commentData.dateAdded}\nComment: ${commentData.comment}`)
+                                        
+                                        if (commentData.recommended) {
+                                            recommendIcon = `<i class="material-icons">thumb_up</i>Recommended`;
+                                        }
+                                        else {
+                                            recommendIcon = `<i class="material-icons">thumb_down</i>Opposed`;
+                                        }
+                                        
+                                        $commentCard = $(`<div class="row">
+                                                            <div class="col s12 m6">
+                                                                <div class="card darken-1">
+                                                                    <div class="card-content">
+                                                                        <p class="date-added">${commentData.dateAdded}</p>
+                                                                        <p class="recommend-icon">${recommendIcon}</p>
+                                                                        <p class="comment">${commentData.comment}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>`);
+                                        $(".comment-cards").prepend($commentCard);
+                                    });
+                                });
+                            }
+                        });
+                    });
+                } // End display comments
+
+                // listBusinesses(sessionStorage.getItem("zip"));
+                quickRatings(sessionStorage.getItem("zip"));
+                // displayComments(sessionStorage.getItem("currentBusiness"), sessionStorage.getItem("zip"))
+                
+                // CLICK EVENTS
+                $("body").on("click", ".business", function() {
+                    // console.log($(this).attr("data-zip"));
+                    var $this = $(this);
+                    var ratingsRef = database.ref(`/business/${$this.attr("data-key")}/ratings`)
+                    $(".review-list").hide();
+
+                    ratingsRef.once("value", function(snap) {
+                        ratings = snap.val();
+                        console.log(ratings);
+                        var titleDiv = $(`<h2 class="business-title">${$this.text().trim()}</h2>
+                                        <p>Zip Code: ${$this.attr("data-zip")}</p>
+                                        <p class="totals">Recomends: ${ratings.recommend}
+                                            <span class="span-separater">Opposed: ${ratings.oppose}</span>
+                                        </p>
+                                        <p class="totals">Cleanliness: ${ratings.clean}
+                                            <span class="span-separater">In Between: ${ratings.ok}</span>
+                                            <span class="span-separater">Grimey: ${ratings.dirty}</span>
+                                        </p>`)
+
+                        $(".title").append(titleDiv);
+                        displayComments($this.text().trim(), $this.attr("data-zip"))
+                    })
+                });
+
+                $("button").on("click", function() {
+                    console.log("zip search")
+                    sessionStorage.setItem("zip", $(".zip-input").val());
+                    $(".content").empty();
+                    quickRatings(sessionStorage.getItem("zip"));
+                })
+
+
+            });//End of document.ready function
+        </script>
+
+    </body>
+
+</html>

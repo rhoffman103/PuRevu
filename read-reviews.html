@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Read Pu ReVus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <!-- Import Logo Font -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Styles CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/styles.css" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="#!" class="brand-logo font-caveat text-darken-2 bold mb-0">Pu ReVu</a>
+                <a href="#" data-target="side-pu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="write-review.html">Write Review</a>
+                    </li>
+                    <li class="active">
+                        <a href="read-reviews.html">Read Reviews
+                            <i class="material-icons left">library_books</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="things-to-read.html">Reading Materials</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="side-pu">
+        <img src="assets/images/logo_blue_smaller.jpg">
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <a href="index.html">
+                <i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+            <a href="write-review.html">
+                <i class="material-icons">rate_review</i>Write Review</a>
+        </li>
+        <li>
+            <a href="read-reviews.html">
+                <i class="material-icons">library_books</i>Read Reviews</a>
+        </li>
+        <li>
+            <a href="things-to-read.html">
+                <i class="material-icons">import_contacts</i>Reading Materials</a>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+    </ul>
+
+    <main>
+        <div class="container">
+            <h1 class="center-align font-caveat blue-text text-darken-2 bold mb-0">Search Your Area for a Pu ReVu</h1>
+
+            <form>
+                Enter Zip:
+                <input id="z-input" class="zip-input" type="text" value="" placeholder="03801">
+                <br>
+                <button type="button" class="waves-effect waves-light blue darken-2 btn">Search</button>
+                <div class="change-zip valign-wrapper pointer-curser">
+                    <a class="blue-text text-darken-2" id="change-zip">
+                        <i class="material-icons right">my_location</i>Change Zip</a>
+                    </div>
+            </form>
+
+            <div class="content">
+                <!-- Display business & total votes -->
+                <div class="title"></div>
+
+                <!-- display comment cards -->
+                <div class="comment-cards"></div>
+
+                <!-- display quick ratings per business -->
+                <div class="review-list"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container  grey-text text-lighten-5 center">
+                Copyright © 2018
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <!-- Scripts -->
+    <script src="assets/javascript/zip.js"></script>
+    <script src="assets/javascript/review-tests.js"></script>
+    <script src="assets/javascript/read-reviews.js"></script>
+    <script src="assets/javascript/scripts.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</body>
+
+</html>

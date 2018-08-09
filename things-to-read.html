@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Reading Materials</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Import Logo Font -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Logo Font -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+
+    <!-- Styles CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/styles.css" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a class="brand-logo font-caveat text-darken-2 bold mb-0">Pu ReVu</a>
+                <a href="#" data-target="side-pu" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="write-review.html">Write Review</a>
+                    </li>
+                    <li>
+                        <a href="read-reviews.html">Read Reviews</a>
+                    </li>
+                    <li class="active">
+                        <a href="things-to-read.html">Reading Materials
+                            <i class="material-icons left">import_contacts</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="side-pu">
+        <div class="background">
+            <img src="assets/images/logo_blue_smaller.jpg">
+        </div>
+        <li>
+            <a href="index.html">
+                <i class="material-icons">home</i>Home</a>
+        </li>
+        <li>
+            <a href="write-review.html">
+                <i class="material-icons">rate_review</i>Write Review</a>
+        </li>
+        <li>
+            <a href="read-reviews.html">
+                <i class="material-icons">library_books</i>Read Reviews</a>
+        </li>
+        <li>
+            <a href="things-to-read.html">
+                <i class="material-icons">import_contacts</i>Reading Materials</a>
+        </li>
+    </ul>
+    <main>
+        <div class="container">
+            <h1 class="center-align font-caveat blue-text text-darken-2 bold mb-0">Post ReVu Reading Materials</h1>
+
+            <!-- First Row -->
+            <div class="row">
+
+                <!-- Top Three Most Popular Daily Articles -->
+                <div class="col s12 m6">
+                    <div class="card-panel">
+                        <h5>Get the Top Three Most Popular Articles from The New York Times by Topic!</h5>
+                        <div class="input-field">
+                            <select id="topic-select">
+                                <option value="" disabled selected>Choose your topic</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Books">Books</option>
+                                <option value="Food">Food</option>
+                                <option value="Movies">Movies</option>
+                                <option value="Sports">Sports</option>
+                            </select>
+                        </div>
+                        <div id="top-three"></div>
+                    </div>
+                </div>
+                <!-- ^^^Top Three Most Popular Daily Articles^^^ -->
+
+                <!-- Dad Jokes -->
+                <div class="col s12 m6">
+                    <div class="card-panel">
+                        <h5>Random Dad Joke Generator!</h5>
+                        <button id="dad-button" class="btn waves-effect waves-light" type="submit" name="action">Dad Button!
+                            <i class="material-icons right">autorenew</i>
+                        </button>
+                        <br>
+                        <br>
+                        <h6 id="dad-joke"></h6>
+                    </div>
+                </div>
+                <!-- ^^^Dad Jokes^^^ -->
+            </div>
+            <!-- ^^^First Row^^^ -->
+
+            <!-- Second Row -->
+            <div class="row">
+
+                <!-- Weather -->
+                <div class="col s12 m6">
+                    <div class="card-panel">
+
+                        <h5>Your Daily Forcast!
+                            <i class="material-icons">cloud_queue</i>
+                        </h5>
+                        <br>
+                        <p id="weather-type">
+                            <b>Forecast:</b>
+                        </p>
+                        <br>
+                        <p id="temp">
+                            <b>Temperature:</b>
+                        </p>
+                        <br>
+                        <p id="wind">
+                            <b>Wind Speed:</b>
+                        </p>
+                    </div>
+                </div>
+                <!-- ^^^Weather^^^ -->
+
+            </div>
+            <!-- ^^^Second Row^^^ -->
+        </div>
+    </main>
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container  grey-text text-lighten-5 center">
+                Copyright © 2018
+            </div>
+        </div>
+    </footer>
+
+    <!-- Second Row -->
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <!-- Scripts -->
+    <script src="assets/javascript/zip.js"></script>
+    <script src="assets/javascript/scripts.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</body>
+
+</html>
