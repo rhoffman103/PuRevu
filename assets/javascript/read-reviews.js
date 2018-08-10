@@ -27,7 +27,6 @@ $(document).ready(function () {
     const listBusinesses = function (postal) {
         var businessRef = database.ref("business");
         businessRef.orderByChild("zip").equalTo(postal).once("value", function (snapshot) {
-            // console.log(snapshot.val());
             var obj = snapshot.val();
             Object.keys(obj).forEach(function (element) {
                 console.log(obj[element].name);
@@ -36,43 +35,41 @@ $(document).ready(function () {
         });
     }
 
-    //  LIST BUSINESSES AND QUICK RATINGS
+    //  LIST BUSINESSES AND QUICK RATINGS BY ZIP
     const quickRatings = function (postal) {
         console.log("calling quick ratings")
         console.log("zip input: " +postal);
         var businessRef = database.ref("business");
         businessRef.orderByChild("zip").equalTo(postal).once("value", function (snapshot) {
-            // console.log(snapshot.val());
             var obj = snapshot.val();
-            Object.keys(obj).forEach(function (element) {
-                console.log("FB business name: " +obj[element].name);
-                console.log("FB business zip: " + obj[element].zip);
-                var recommendPerc = Math.round((obj[element].ratings.recommend / (obj[element].ratings.recommend + obj[element].ratings.oppose)) * 100);
-                var cleanPerc = Math.round((obj[element].ratings.clean / (obj[element].ratings.clean + obj[element].ratings.dirty)) * 100);
-                var reviewDiv = $(`<div class="row">
-                                <div class="col s12 m6">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <span class="card-title">
-                                                <h3 class="business pointer-curser blue-text text-darken-2" data-zip="${obj[element].zip}" data-key="${element}">${toTitleCase(obj[element].name)}</h3>
-                                            </span>
-                                        </div>
-                                        <div class="card-action">
-                                            <p>% ${recommendPerc} Recommended | % ${cleanPerc} Cleanliness</p>
+
+            // check if there are any entries in this zip code & append info
+            if (snapshot.val() !== null) {
+                console.log("object keys: " + Object.keys(obj)[0])
+                Object.keys(obj).forEach(function (element) {
+                    var recommendPerc = Math.round((obj[element].ratings.recommend / (obj[element].ratings.recommend + obj[element].ratings.oppose)) * 100);
+                    var cleanPerc = Math.round((obj[element].ratings.clean / (obj[element].ratings.clean + obj[element].ratings.dirty)) * 100);
+                    var reviewDiv = $(`<div class="row">
+                                    <div class="col s12 m6">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <span class="card-title">
+                                                    <h3 class="business pointer-curser blue-text text-darken-2" data-zip="${obj[element].zip}" data-key="${element}">${toTitleCase(obj[element].name)}</h3>
+                                                </span>
+                                            </div>
+                                            <div class="card-action">
+                                                <p>% ${recommendPerc} Recommended | % ${cleanPerc} Cleanliness</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>`)
-                            
-                // Andrews cleanliness average fix with "ok" vote
-                // var cleanPerc = Math.round((obj[element].ratings.clean / (obj[element].ratings.clean + obj[element].ratings.dirty + obj[element].ratings.ok)) * 100);
-                // ratingThing.text('%' + recommendPerc + " Recommended | %" + cleanPerc + " Cleanliness");
-                // header.text(obj[element].name);
-                // reviewDiv.append(header);
-                // reviewDiv.append(ratingThing);
-                $(".review-list").append(reviewDiv);
-            })
-            // console.log(snapshot.key);
+                                </div>`)
+                                
+                    $(".review-list").append(reviewDiv);
+                })
+            }
+            else {
+                $(".review-list").append(`<p>Be the first Pu Reviewer in this area!</p>`);
+            }
         });
     }
     
@@ -123,21 +120,9 @@ $(document).ready(function () {
         });
     } // End display comments
 
-    // listBusinesses(sessionStorage.getItem("zip"));
-    quickRatings(sessionStorage.getItem("zip"));
-    // displayComments(sessionStorage.getItem("currentBusiness"), sessionStorage.getItem("zip"))
-    
-    // CLICK EVENTS
-    $("body").on("click", ".business", function() {
-        // console.log($(this).attr("data-zip"));
-        var $this = $(this);
-        var ratingsRef = database.ref(`/business/${$this.attr("data-key")}/ratings`)
-        $(".review-list").hide();
-
-        ratingsRef.once("value", function(snap) {
-            ratings = snap.val();
-            console.log(ratings);
-            var titleDiv = $(`<div class="separator">
+    //  DISPLAYS BUSINESS NAME AND VOTES
+    const displayTotalVotes = function(ratings, $this) {
+        var titleDiv = $(`<div class="separator">
                                 <h2 class="business-title">${$this.text().trim()}</h2>
                                 <p class="mb-20">Zip Code: ${$this.attr("data-zip")}</p>
                                 <p class="totals mb-8">Recomends: ${ratings.recommend}
@@ -149,19 +134,50 @@ $(document).ready(function () {
                             </div>`)
 
             $(".title").append(titleDiv);
-            displayComments($this.text().trim(), $this.attr("data-zip"))
-        })
-    });
+    }
 
-    $("button").on("click", function() {
+    //  Search Event for businesses
+    const enterSearch = function() {
         console.log("zip search")
         sessionStorage.setItem("zip", $(".zip-input").val());
         $(".title").empty();
         $(".comment-cards").empty();
         $(".review-list").empty();
         quickRatings($(".zip-input").val());
+    }
+
+    //  Initialize sidebar
+    $('.sidenav').sidenav();
+
+    //  Display default for page opening
+    quickRatings(sessionStorage.getItem("zip"));
+    
+    // CLICK EVENTS
+    // Opens clicked business and displays votes & comments
+    $("body").on("click", ".business", function() {
+        // console.log($(this).attr("data-zip"));
+        var $this = $(this);
+        var ratingsRef = database.ref(`/business/${$this.attr("data-key")}/ratings`)
+        $(".review-list").empty();
+
+        ratingsRef.once("value", function(snap) {
+            ratings = snap.val();
+            console.log(ratings);
+            displayTotalVotes(ratings, $this);
+            displayComments($this.text().trim(), $this.attr("data-zip"))
+        })
+    });
+
+    // Searches for businesses by zip
+    $("button").on("click", function() {
+        enterSearch();
     })
-//Initialize sidebar
-$('.sidenav').sidenav();
+
+    $(document).on("keypress", "#z-input", function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            enterSearch();
+        }
+    })
 
 });//End of document.ready function
